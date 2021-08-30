@@ -1,0 +1,9 @@
+<mat-card  fxLayout="column" fxLayoutAlign="center" class="layout-wrapper"> 
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-card-title>Raktárak</mat-card-title>
+        <button *ngIf="user && user.role == 'admin'" mat-raised-button color="primary" (click)="newStore()">Új Raktár</button>
+    </mat-card-header>
+    <div fxFlex fxFlex.lt-md="100%" class="flex-wrapper">
+        <app-store-table></app-store-table>
+    </div>
+</mat-card>

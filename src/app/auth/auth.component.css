@@ -1,0 +1,19 @@
+.layout-wrapper{ 
+    height: 100%; 
+    width: 600px;
+    margin: 30px auto;
+} 
+.flex-wrapper{ 
+    height: 100%; 
+    padding: 16px;
+}
+
+mat-card-header {
+    margin-bottom: 16px;
+}
+
+@media(max-width: 960px){
+    .layout-wrapper{ 
+        width: 100%;
+    } 
+}

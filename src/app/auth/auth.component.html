@@ -1,0 +1,22 @@
+<mat-card  fxLayout="column" fxLayoutAlign="center" class="layout-wrapper"> 
+    <mat-card-header fxLayout="row" fxLayoutAlign>
+        <mat-card-title>Bejelentkezés</mat-card-title>
+    </mat-card-header>
+    <div fxFlex fxFlex.lt-md="100%" class="flex-wrapper">
+        <form [formGroup] = "authForm" (ngSubmit)="onSubmit(authForm)">
+            <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-around none">
+              <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email..." formControlName="email" type="email">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Jelszó</mat-label>
+                <input matInput placeholder="Jelszó..."formControlName="password" type="password">
+              </mat-form-field>
+            </div>
+            <div mat-dialog-actions align="end">
+              <button mat-button type="submit">Bejelentkezés</button>
+            </div>
+          </form>
+    </div>
+</mat-card>

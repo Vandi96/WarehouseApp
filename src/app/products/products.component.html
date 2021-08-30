@@ -1,0 +1,9 @@
+<mat-card  fxLayout="column" fxLayoutAlign="center" class="layout-wrapper"> 
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-card-title>Tárgyak</mat-card-title>
+        <button *ngIf="user && user.role == 'admin'" mat-raised-button color="primary" (click)="newProduct()">Új Tárgy</button>
+    </mat-card-header>
+    <div fxFlex fxFlex.lt-md="100%" class="flex-wrapper">
+        <app-product-table></app-product-table>
+    </div>
+</mat-card>

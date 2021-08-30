@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{data.editMode ? "Tárgy Szerkesztése" : "Új Tárgy Létrehozása"}}</h2>
+<form [formGroup] = "productForm" (ngSubmit)="onSubmit(productForm.value)">
+  <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-around none">
+    <mat-form-field appearance="fill">
+      <mat-label>Név</mat-label>
+      <input matInput placeholder="Név..." formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Hosszúság</mat-label>
+      <input matInput placeholder="Hosszúság..."formControlName="length" type="number">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Szélesség</mat-label>
+      <input matInput placeholder="Szélesség..." formControlName="width" type="number">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Mégse</button>
+    <button mat-button type="submit" [disabled]="!productForm.valid">Mentés</button>
+  </div>
+</form>
