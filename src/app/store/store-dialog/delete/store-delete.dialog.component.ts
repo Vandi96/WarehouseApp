@@ -14,8 +14,4 @@ import { Store } from "../../store.model";
     constructor(
       public dialogRef: MatDialogRef<StoreDeleteDialog>,
       @Inject(MAT_DIALOG_DATA) public data: Store) {}
-  
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
   }

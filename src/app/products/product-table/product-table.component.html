@@ -5,49 +5,46 @@
     </mat-form-field>
     
     <div>
-      <table mat-table [dataSource]="dataSource">
-          
-        <!-- Name Column -->
-        <ng-container matColumnDef="név">
-          <th mat-header-cell *matHeaderCellDef>Név</th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-      
-        <!-- Weight Column -->
-        <ng-container matColumnDef="hosszúság">
-          <th mat-header-cell *matHeaderCellDef>Hosszúság</th>
-          <td mat-cell *matCellDef="let element"> {{element.length}} </td>
-        </ng-container>
-      
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="dátum">
-          <th mat-header-cell *matHeaderCellDef>Létrehozás dátuma</th>
-          <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
-        </ng-container>
+    <mat-table [dataSource]="dataSource" matSort>
 
-        <ng-container matColumnDef="star">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
+      <ng-container matColumnDef="név">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Név </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="név"> {{element.name}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="hosszúság">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Hosszúság </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="hosszúság"> {{element.length}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="dátum">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Létrehozás dátuma </mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="dátum"> {{element.createdAt}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="star">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button *ngIf="user && user.role == 'admin'" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editProduct(element)">
+              <mat-icon>edit</mat-icon>
+              <span>Szerkesztés</span>
             </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editProduct(element)">
-                <mat-icon>edit</mat-icon>
-                <span>Szerkesztés</span>
-              </button>
-              <button mat-menu-item (click)="deleteProduct(element)">
-                <mat-icon>delete</mat-icon>
-                <span>Törlés</span>
-              </button>
-            </mat-menu>
-          </td>
-        </ng-container>
-    
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+            <button mat-menu-item (click)="deleteProduct(element)">
+              <mat-icon>delete</mat-icon>
+              <span>Törlés</span>
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
     </div>
 </div>

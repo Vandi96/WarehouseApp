@@ -38,10 +38,6 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
       });
     }
 
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-
     onSubmit(formValue: any) {
       const result = {
         validForm: "true",

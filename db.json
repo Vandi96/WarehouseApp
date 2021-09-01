@@ -33,14 +33,14 @@
     {
       "id": 3,
       "name": "Körte",
-      "length": 1,
+      "length": 5,
       "width": 1,
       "createdAt": "2021. 08. 28. 21:49:19"
     },
     {
       "id": 4,
       "name": "Körtefa",
-      "length": 1,
+      "length": 3,
       "width": 2,
       "createdAt": "2021. 08. 28. 21:49:19"
     },
@@ -64,13 +64,6 @@
       "length": 1,
       "width": 1,
       "createdAt": "2021. 08. 28. 21:49:19"
-    },
-    {
-      "name": "Nem Tudom",
-      "length": 2,
-      "width": 3,
-      "createdAt": "2021. 08. 28. 21:55:14",
-      "id": 10
     }
   ],
   "stores": [
@@ -85,7 +78,7 @@
       "id": 2,
       "uuid": "223123123",
       "address": "4024 Debrecen, Piac u. 21.",
-      "length": 1,
+      "length": 2,
       "width": 2
     },
     {
@@ -100,14 +93,14 @@
       "uuid": "423123123",
       "address": "4024 Debrecen, Piac u. 23.",
       "length": 1,
-      "width": 1
+      "width": 3
     },
     {
       "id": 5,
       "uuid": "523123123",
       "address": "4024 Debrecen, Piac u. 24.",
       "length": 2,
-      "width": 1
+      "width": 3
     },
     {
       "id": 6,

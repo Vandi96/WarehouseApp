@@ -2,15 +2,16 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
+import { ProductService } from "../products/product.service";
 import { Store } from "./store.model";
 
 @Injectable()
 export class StoreService {
     storesChanged = new Subject<Boolean>();
-    
+    isStoreEnough= new Subject<Boolean>();
     public readonly STORES_API_URL = `http://localhost:3000/stores/`;
    
-    constructor(private http: HttpClient) {     
+    constructor(private http: HttpClient, private productService: ProductService) {   
     }
 
     getStores() {
@@ -37,6 +38,26 @@ export class StoreService {
            return throwError( 'Something went wrong!' );
          })
       );
+    }
+
+    async getStoresSizes(s) {
+      let sumLength = s.map(element => element.length).reduce((curr, prev) => { return curr + prev; });
+      let sumWidth = s.map(element => element.width).reduce((curr, prev) => { return curr + prev; });
+      let products;
+
+      (await this.productService.getProducts()).subscribe(
+        (data: any) => {
+          products = data;
+          let pSumLength = products.map(element => element.length).reduce((curr, prev) => { return curr + prev; });
+          let pSumWidth = products.map(element => element.width).reduce((curr, prev) => { return curr + prev; });
+      
+          if (sumLength >= pSumLength && sumWidth >= pSumWidth) {
+              this.isStoreEnough.next(true);
+          } else {
+            this.isStoreEnough.next(false);
+          }
+        }
+      )
     }
 
     createStore(data: any) {

@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/shared/user.model';
 import { StoreDeleteDialog } from '../store-dialog/delete/store-delete.dialog.component';
 import { StoreEditDialog } from '../store-dialog/edit/store-edit.dialog.component';
 import { Store } from '../store.model';
@@ -17,9 +19,11 @@ import { StoreService } from '../store.service';
 export class StoreTableComponent implements OnInit {
   displayedColumns: string[] = ['azonosító', "cím", 'hosszúság', 'szélesség',  'star'];
   dataSource: MatTableDataSource<Store>;
+  isStoreEnough: Boolean;
+  user: User;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private http: HttpClient, private storeService: StoreService, public dialog: MatDialog) {
+  constructor(private http: HttpClient, private storeService: StoreService, public dialog: MatDialog, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -28,6 +32,18 @@ export class StoreTableComponent implements OnInit {
          this.initTable(); 
       }
     );
+
+    this.authService.user.subscribe(
+      (user: User) => {
+          this.user = user;
+      }
+    );
+
+    this.storeService.isStoreEnough.subscribe(
+      (result: boolean) => {
+        this.isStoreEnough = result;
+      }
+    )
 
      this.initTable();
   }
@@ -46,6 +62,7 @@ export class StoreTableComponent implements OnInit {
           return data.address.toLowerCase().includes(filter);
         };
 
+        this.storeService.getStoresSizes(this.dataSource.data);
         this.dataSource.paginator = this.paginator;
       });
   }

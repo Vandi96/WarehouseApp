@@ -5,35 +5,32 @@
     </mat-form-field>
     
     <div>
-      <table mat-table [dataSource]="dataSource">
+      <mat-table [dataSource]="dataSource">
         
         <ng-container matColumnDef="azonosító">
-            <th mat-header-cell *matHeaderCellDef>Azonosító</th>
-            <td mat-cell *matCellDef="let element"> {{element.uuid}} </td>
+            <mat-header-cell *matHeaderCellDef>Azonosító</mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="azonosító"> {{element.uuid}} </mat-cell>
           </ng-container>
 
-        <!-- Name Column -->
         <ng-container matColumnDef="cím">
-          <th mat-header-cell *matHeaderCellDef>Cím</th>
-          <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+          <mat-header-cell *matHeaderCellDef>Cím</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="cím"> {{element.address}} </mat-cell>
         </ng-container>
       
-        <!-- Weight Column -->
         <ng-container matColumnDef="hosszúság">
-          <th mat-header-cell *matHeaderCellDef>Hosszúság</th>
-          <td mat-cell *matCellDef="let element"> {{element.length}} </td>
+          <mat-header-cell *matHeaderCellDef>Hosszúság</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="hosszúság"> {{element.length}} </mat-cell>
         </ng-container>
       
-        <!-- Symbol Column -->
         <ng-container matColumnDef="szélesség">
-          <th mat-header-cell *matHeaderCellDef>Szélesség</th>
-          <td mat-cell *matCellDef="let element"> {{element.width}} </td>
+          <mat-header-cell *matHeaderCellDef>Szélesség</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="szélesség"> {{element.width}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="star">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button *ngIf="user && user.role == 'admin'" mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
@@ -46,13 +43,18 @@
                 <span>Törlés</span>
               </button>
             </mat-menu>
-          </td>
+          </mat-cell>
         </ng-container>
     
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
     </div>
+</div>
+<div *ngIf="isStoreEnough" class="greenRec" fxLayout fxLayoutAlign="center none">
+  <p>BELEFÉR</p>
+</div>
+<div *ngIf="!isStoreEnough" class="redRec" fxLayout fxLayoutAlign="center none">
+  <p>NEM FÉR</p>
 </div>

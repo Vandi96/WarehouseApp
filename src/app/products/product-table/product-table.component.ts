@@ -8,6 +8,8 @@ import { Product } from 'src/app/shared/product.model';
 import { ProductService } from '../product.service';
 import { ProductDeleteDialog } from '../product-dialog/delete/product-delete.dialog.component';
 import { ProductEditDialog } from '../product-dialog/edit/product-edit.dialog.component';
+import { User } from 'src/app/shared/user.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-product-table',
@@ -17,9 +19,10 @@ import { ProductEditDialog } from '../product-dialog/edit/product-edit.dialog.co
 export class ProductTableComponent implements OnInit {
   displayedColumns: string[] = ['név', 'hosszúság', 'dátum', 'star'];
   dataSource: MatTableDataSource<Product>;
+  user: User;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private http: HttpClient, private productService: ProductService, public dialog: MatDialog) {
+  constructor(private http: HttpClient, private productService: ProductService, public dialog: MatDialog, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -29,6 +32,12 @@ export class ProductTableComponent implements OnInit {
       }
     );
 
+    this.authService.user.subscribe(
+      (user: User) => {
+          this.user = user;
+      }
+    );
+    
      this.initTable();
   }
 

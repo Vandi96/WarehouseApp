@@ -15,7 +15,4 @@ import { Product } from "src/app/shared/product.model";
       public dialogRef: MatDialogRef<ProductDeleteDialog>,
       @Inject(MAT_DIALOG_DATA) public data: Product) {}
   
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
   }

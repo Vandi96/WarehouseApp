@@ -8,13 +8,14 @@ import { Subject } from "rxjs";
 
 @Injectable()
 export class ProductService {
-    productsChanged = new Subject<Boolean>()
+    productsChanged = new Subject<Boolean>();
+    productSizes: Object;
     public readonly PRODUCTS_API_URL = `http://localhost:3000/products/`;
    
     constructor(private http: HttpClient) {     
     }
 
-    getProducts() {
+    getProducts()  {
         return this.http.get(this.PRODUCTS_API_URL)
             .pipe(
                map((data: Product[]) => {
